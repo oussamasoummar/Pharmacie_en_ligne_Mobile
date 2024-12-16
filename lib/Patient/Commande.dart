@@ -16,31 +16,10 @@ class _HistoryCommandeScreenState extends State<HistoryCommandeScreen> {
   @override
   void initState() {
     super.initState();
-    fetchOrdonnances();
+    
   }
 
-  Future<void> fetchOrdonnances() async {
-    try {
-      final response = await http.get(
-        Uri.parse('http://your-backend-url/orders?userId=123'),
-      );
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body);
-        setState(() {
-          ordonnances = data.map((item) => Ordonnance.fromJson(item)).toList();
-          isLoading = false;
-        });
-      } else {
-        throw Exception('Failed to load orders');
-      }
-    } catch (error) {
-      setState(() {
-        isLoading = false;
-      });
-      print('Error fetching orders: $error');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
